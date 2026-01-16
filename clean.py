@@ -10,3 +10,4 @@ print(df.head())
 counts = df['instrument'].value_counts()
 
 print(counts)
+
