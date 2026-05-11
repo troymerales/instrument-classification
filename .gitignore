@@ -1,9 +1,3 @@
 # Large local data — not committed (see README)
 dataset/
-dataset_full/
-features_cqt/
-features_mfcc/
-features_summary/
-features_full_cqt/
-features_full_mfcc/
-features_full_summary/
+features/
