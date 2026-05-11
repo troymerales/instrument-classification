@@ -1,0 +1,7 @@
+Instrument Pair,Accuracy
+Cello vs Acoustic Guitar,0.9073170731707317
+Cello vs Electric Guitar,0.9304347826086956
+Cello vs Violin,0.8505154639175257
+Acoustic Guitar vs Electric Guitar,0.9178571428571428
+Acoustic Guitar vs Violin,0.8975409836065574
+Electric Guitar vs Violin,0.8731343283582089

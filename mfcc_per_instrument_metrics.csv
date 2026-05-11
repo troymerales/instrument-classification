@@ -1,0 +1,5 @@
+Instrument,Accuracy,Precision,Recall,F1-Score
+Cello,0.641,0.7812,0.641,0.7042
+Acoustic Guitar,0.8189,0.7761,0.8189,0.7969
+Electric Guitar,0.8947,0.8095,0.8947,0.85
+Violin,0.7069,0.7664,0.7069,0.7354
