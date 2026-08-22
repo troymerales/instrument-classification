@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instrument Classifier</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <h1>Instrument Classifier</h1>
+    <p class="subtitle">Faithful deployment of <code>new_methods.ipynb</code> — no retraining, no invented features.</p>
+
+    <section>
+      <h2>Upload</h2>
+      <div id="dropzone">
+        Drop an audio file here, or click to browse
+        <div id="fileName"></div>
+      </div>
+      <input type="file" id="fileInput" accept=".wav,.mp3,.flac,.ogg,.m4a,.aac,.aiff,.aif">
+      <div class="controls">
+        <label for="featureSet">Feature set:</label>
+        <select id="featureSet">
+          <option value="mfcc">MFCC</option>
+          <option value="stft">STFT</option>
+          <option value="cqt">CQT</option>
+        </select>
+        <button id="analyzeBtn" disabled>Analyze Audio</button>
+      </div>
+      <div class="error" id="errorBox"></div>
+    </section>
+
+    <div id="results">
+      <section>
+        <h2>Predicted Instrument</h2>
+        <div class="predicted-class" id="predictedClass">—</div>
+        <audio id="player" controls></audio>
+      </section>
+
+      <section>
+        <h2>Feature Extraction</h2>
+        <figure>
+          <img id="imgWaveform" alt="Waveform and audio features">
+          <figcaption>Waveform with normalized ZCR, RMS energy, spectral centroid, bandwidth, and roll-off overlaid (matches the notebook's summary-statistics plot).</figcaption>
+        </figure>
+        <figure>
+          <img id="imgMel" alt="Mel spectrogram">
+          <figcaption>Mel spectrogram in dB (n_mels=26) — the notebook's log spectrogram.</figcaption>
+        </figure>
+        <figure>
+          <img id="imgMfcc" alt="MFCC">
+          <figcaption>MFCC (n_mfcc=13) computed with the same parameters used to build the model's input feature.</figcaption>
+        </figure>
+        <figure>
+          <img id="imgFilterbank" alt="Mel filter bank">
+          <figcaption>Mel filter bank used to derive the mel spectrogram/MFCC (fixed diagram — depends only on sample rate/FFT size, not on this specific audio).</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>PCA Classifier Space</h2>
+        <div class="pc-coords" id="pcCoords"></div>
+        <figure>
+          <img id="imgPca" alt="PCA decision regions">
+        </figure>
+        <p class="note">
+          The classifier itself is trained and predicts in the full feature space
+          (18/89/1030 dimensions depending on feature set). This panel is a 2D PCA
+          projection used only for visualization: the background regions come from
+          a separate SVM fit on the 2D PCA coordinates of the training data, not the
+          real classifier's decision boundary. The star (★) is this upload's own
+          feature vector, projected with the same fitted PCA — never refit.
+        </p>
+      </section>
+    </div>
+
+    <section class="methodology">
+      <h2>Methodology</h2>
+      <p>This app reproduces the pipeline in <code>new_methods.ipynb</code> exactly, for one new audio file at a time. Nothing below is invented beyond what deployment requires.</p>
+
+      <h3>Preprocessing</h3>
+      <p><code>librosa.load(path, sr=22050)</code> — mono, resampled to 22050 Hz. No trimming, padding, or amplitude normalization.</p>
+
+      <h3>Features (concatenated into one vector)</h3>
+      <p><strong>Summary statistics (5, always computed):</strong> zero-crossing rate, RMS energy, spectral centroid, spectral roll-off (85th percentile), spectral bandwidth — each the mean over frames (hop_length=512).</p>
+      <p><strong>Main transform (one, by feature set):</strong> MFCC (13 coefficients, n_fft=2048), STFT magnitude (1025 bins), or CQT magnitude (84 bins) — each averaged over time.</p>
+
+      <h3>Classification</h3>
+      <p>A scikit-learn <code>Pipeline(StandardScaler → SVC(kernel="rbf", C=10, gamma="scale"))</code>, already fitted on the IRMAS training set, is loaded and only ever called with <code>.predict()</code>. The scaler and SVM are never refit on uploaded audio.</p>
+
+      <h3>PCA visualization</h3>
+      <p>PCA is not part of the classifier — it is used only to visualize the trained feature space in 2D. A <code>StandardScaler</code> and <code>PCA(n_components=2)</code> were fit once, offline, on the notebook's own saved training+test feature arrays; a separate 2D SVM was fit on those PCA coordinates purely to draw decision regions. New audio is projected into this space with <code>.transform()</code> only.</p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

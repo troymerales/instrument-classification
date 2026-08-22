@@ -5,6 +5,40 @@ Jupyter notebooks for **predominant instrument recognition** in musical audio, u
 ## What’s in this repository
 
 - Notebooks such as `main.ipynb`, `flattened.ipynb`, and `full.ipynb` for feature extraction, flattening, and experiments.
+- `new_methods.ipynb` — the **source-of-truth methodology** (preprocessing, feature extraction, PCA, SVM) for the deployed app below.
+- `backend/`, `frontend/`, `scripts/`, `models/instrument_classifier/` — a FastAPI + vanilla-JS app that deploys `new_methods.ipynb`'s existing trained pipeline for inference on new audio. See "Running the app" below.
+
+## Running the app
+
+The app reuses the already-fitted classifier pipelines in `saved_models/` — it
+never retrains, refits a scaler, or refits PCA. See
+`models/instrument_classifier/README.md` for exactly which artifacts are used
+and where they come from.
+
+```bash
+pip install -r requirements.txt
+uvicorn backend.main:app --reload
+```
+
+Open http://127.0.0.1:8000, upload an audio file (wav/mp3/flac/ogg/m4a/aac/aiff),
+choose a feature set (MFCC/STFT/CQT), and click "Analyze Audio".
+
+Run the test suite:
+
+```bash
+pytest backend/tests
+```
+
+Or with Docker:
+
+```bash
+docker build -t instrument-classifier .
+docker run -p 8000:8000 instrument-classifier
+```
+
+If the underlying dataset/model is ever retrained, regenerate the deployed
+artifacts with `python scripts/build_viz_artifacts.py` (see that script and
+`models/instrument_classifier/README.md` for what it does and why).
 
 ## What is not in version control (by choice)
 

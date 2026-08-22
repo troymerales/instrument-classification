@@ -1,3 +1,8 @@
 # Large local data — not committed (see README)
 dataset/
 features/
+
+# Python bytecode caches
+__pycache__/
+*.pyc
+.pytest_cache/
