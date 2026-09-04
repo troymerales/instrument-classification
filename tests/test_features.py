@@ -1,8 +1,8 @@
 import librosa
 import numpy as np
 
-from backend.app.config import HOP_LENGTH, N_FFT, N_MFCC, ROLL_PERCENT
-from backend.app.features.extract import (
+from instrument_classifier.config import HOP_LENGTH, N_FFT, N_MFCC, ROLL_PERCENT
+from instrument_classifier.features.extract import (
     extract_cqt,
     extract_feature_vector,
     extract_mfcc,

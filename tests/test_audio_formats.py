@@ -5,8 +5,8 @@ import numpy as np
 import pytest
 import soundfile as sf
 
-from backend.app.audio.loader import UnsupportedAudioError, load_audio
-from backend.app.config import SR
+from instrument_classifier.audio.loader import UnsupportedAudioError, load_audio
+from instrument_classifier.config import SR
 
 
 def _encode(y: np.ndarray, sr: int, fmt: str) -> bytes:

@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import soundfile as sf
 
-from backend.app.config import SR
+from instrument_classifier.config import SR
 
 
 def _sine_wave(freq: float, seconds: float = 1.5, sr: int = SR) -> np.ndarray:

@@ -14,7 +14,7 @@ from functools import lru_cache
 import joblib
 import numpy as np
 
-from backend.app.config import FEATURE_SETS, viz_dir
+from instrument_classifier.config import FEATURE_SETS, viz_dir
 
 
 @dataclass(frozen=True)

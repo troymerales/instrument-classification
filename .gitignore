@@ -1,8 +1,19 @@
-# Large local data — not committed (see README)
-dataset/
-features/
+# Large local data — not committed (see README).
+# Anchored to the repo root so they don't shadow instrument_classifier/features/.
+/dataset/
+/features/
+/features_*/
+/dataset_*/
 
 # Python bytecode caches
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Environments / secrets
+.venv/
+venv/
+.env
+.streamlit/secrets.toml
+# Jupyter
+.ipynb_checkpoints/

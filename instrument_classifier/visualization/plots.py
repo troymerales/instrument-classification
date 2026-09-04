@@ -17,8 +17,8 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 
-from backend.app.config import CLASS_NAMES, HOP_LENGTH, N_FFT, N_MFCC, SR, VIZ_N_MELS  # noqa: E402
-from backend.app.pca.viz import VizArtifacts  # noqa: E402
+from instrument_classifier.config import CLASS_NAMES, HOP_LENGTH, N_FFT, N_MFCC, SR, VIZ_N_MELS  # noqa: E402
+from instrument_classifier.pca.viz import VizArtifacts  # noqa: E402
 
 
 def _normalize(x: np.ndarray) -> np.ndarray:

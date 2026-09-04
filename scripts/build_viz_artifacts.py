@@ -43,7 +43,7 @@ from sklearn.svm import SVC
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from backend.app.config import (  # noqa: E402
+from instrument_classifier.config import (  # noqa: E402
     CLASS_NAMES,
     FEATURE_SETS,
     MODEL_DIR,

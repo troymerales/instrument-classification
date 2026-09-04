@@ -7,8 +7,8 @@ input dimensionality must match what extract_feature_vector actually produces.
 import numpy as np
 import pytest
 
-from backend.app.features.extract import extract_feature_vector
-from backend.app.models.registry import get_labels, get_pipeline
+from instrument_classifier.features.extract import extract_feature_vector
+from instrument_classifier.models.registry import get_labels, get_pipeline
 
 EXPECTED_DIMS = {"mfcc": 18, "stft": 1030, "cqt": 89}
 
@@ -33,7 +33,7 @@ def test_labels_cover_all_pipeline_classes(feature_set):
 
 
 def test_labels_json_matches_notebook_class_names():
-    from backend.app.config import CLASS_NAMES
+    from instrument_classifier.config import CLASS_NAMES
 
     labels = get_labels()
     assert labels == CLASS_NAMES

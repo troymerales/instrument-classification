@@ -16,7 +16,7 @@ import io
 import librosa
 import numpy as np
 
-from backend.app.config import SR
+from instrument_classifier.config import SR
 
 SUPPORTED_EXTENSIONS = {".wav", ".mp3", ".flac", ".ogg", ".m4a", ".aac", ".aiff", ".aif"}
 

@@ -10,7 +10,7 @@ from functools import lru_cache
 import joblib
 from sklearn.pipeline import Pipeline
 
-from backend.app.config import FEATURE_SETS, labels_path, model_path
+from instrument_classifier.config import FEATURE_SETS, labels_path, model_path
 
 
 @lru_cache(maxsize=1)

@@ -36,7 +36,7 @@ SVM_GAMMA = "scale"
 FEATURE_SETS = ("mfcc", "stft", "cqt")
 
 # --- Paths ------------------------------------------------------------------
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[1]
 MODEL_DIR = Path(os.environ.get("MODEL_DIR", REPO_ROOT / "models" / "instrument_classifier"))
 SAVED_DATA_DIR = REPO_ROOT / "saved_data"
 SAVED_MODELS_DIR = REPO_ROOT / "saved_models"

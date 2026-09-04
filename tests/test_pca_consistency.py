@@ -7,9 +7,9 @@ static placeholder.
 
 import numpy as np
 
-from backend.app.features.extract import extract_feature_vector
-from backend.app.inference.pipeline import analyze
-from backend.app.pca.viz import load_viz_artifacts, project
+from instrument_classifier.features.extract import extract_feature_vector
+from instrument_classifier.inference.pipeline import analyze
+from instrument_classifier.pca.viz import load_viz_artifacts, project
 
 
 def test_project_matches_manual_transform(sine_audio_array):

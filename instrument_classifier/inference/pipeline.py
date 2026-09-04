@@ -8,10 +8,10 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from backend.app.audio.loader import load_audio
-from backend.app.features.extract import extract_feature_vector
-from backend.app.models.registry import class_name, get_pipeline
-from backend.app.pca.viz import project
+from instrument_classifier.audio.loader import load_audio
+from instrument_classifier.features.extract import extract_feature_vector
+from instrument_classifier.models.registry import class_name, get_pipeline
+from instrument_classifier.pca.viz import project
 
 
 @dataclass(frozen=True)

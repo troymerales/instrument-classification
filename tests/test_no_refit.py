@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 
-from backend.app.inference.pipeline import analyze
+from instrument_classifier.inference.pipeline import analyze
 
 
 @pytest.fixture(autouse=True)
